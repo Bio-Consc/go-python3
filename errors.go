@@ -69,11 +69,6 @@ func PyErr_NoMemory() *PyObject {
 	return togo(C.PyErr_NoMemory())
 }
 
-//PyErr_SetImportErrorSubclass : https://docs.python.org/3/c-api/exceptions.html#c.PyErr_SetImportErrorSubclass
-func PyErr_SetImportErrorSubclass(msg, name, path, subclass *PyObject) *PyObject {
-	return togo(C.PyErr_SetImportErrorSubclass(toc(msg), toc(name), toc(path), toc(subclass)))
-}
-
 //PyErr_SetImportError : https://docs.python.org/3/c-api/exceptions.html#c.PyErr_SetImportError
 func PyErr_SetImportError(msg, name, path *PyObject) *PyObject {
 	return togo(C.PyErr_SetImportError(toc(msg), toc(name), toc(path)))

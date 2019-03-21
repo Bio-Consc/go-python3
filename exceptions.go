@@ -48,7 +48,6 @@ var (
 	PyExc_KeyboardInterrupt      = togo(C.PyExc_KeyboardInterrupt)
 	PyExc_LookupError            = togo(C.PyExc_LookupError)
 	PyExc_MemoryError            = togo(C.PyExc_MemoryError)
-	PyExc_ModuleNotFoundError    = togo(C.PyExc_ModuleNotFoundError)
 	PyExc_NameError              = togo(C.PyExc_NameError)
 	PyExc_NotADirectoryError     = togo(C.PyExc_NotADirectoryError)
 	PyExc_NotImplementedError    = togo(C.PyExc_NotImplementedError)
