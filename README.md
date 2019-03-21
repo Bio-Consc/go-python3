@@ -8,8 +8,14 @@ This package provides a ``go`` package named "python" under which most of the
 exposed. Theoretically, you should be able use https://docs.python.org/3/c-api
 and know what to type in your ``go`` program.
 
+<<<<<<< HEAD
 Currently supports python-3.7+  
 
+=======
+Currently supports python-3.7+.
+
+This project was inspired by https://github.com/sbinet/go-python. Go and take a look if we need something for python-2.7!
+>>>>>>> 0b25cc550560f4b3e49c89af907f7cfeffe94dac
 
 Install
 -------
@@ -39,3 +45,5 @@ the `int` represent the error code from the CPython `PyRun_AnyFile` function
 and error will be set if we failed to open `filename`.
 
 If an error is raise before calling th CPython function `int` default to `-1`.
+
+Take a look at some [examples](examples)

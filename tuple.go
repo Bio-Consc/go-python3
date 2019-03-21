@@ -10,12 +10,12 @@ package python3
 /*
 #include "Python.h"
 #include "macro.h"
-#include "type.h"
 */
 import "C"
+import "unsafe"
 
 //Tuple : https://docs.python.org/3/c-api/tuple.html#c.PyTuple_Type
-var Tuple = togo(C._go_PyTuple_Type)
+var Tuple = togo((*C.PyObject)(unsafe.Pointer(&C.PyTuple_Type)))
 
 //PyTuple_Check : https://docs.python.org/3/c-api/tuple.html#c.PyTuple_Check
 func PyTuple_Check(p *PyObject) bool {
@@ -48,6 +48,6 @@ func PyTuple_GetSlice(p *PyObject, low, high int) *PyObject {
 }
 
 //PyTuple_SetItem : https://docs.python.org/3/c-api/tuple.html#c.PyTuple_SetItem
-func PyTuple_SetItem(p *PyObject, pos int, o *PyObject) {
-	C.PyTuple_SetItem(toc(p), C.Py_ssize_t(pos), toc(o))
+func PyTuple_SetItem(p *PyObject, pos int, o *PyObject) int {
+	return int(C.PyTuple_SetItem(toc(p), C.Py_ssize_t(pos), toc(o)))
 }

@@ -10,12 +10,12 @@ package python3
 /*
 #include "Python.h"
 #include "macro.h"
-#include "type.h"
 */
 import "C"
+import "unsafe"
 
 //List : https://docs.python.org/3/c-api/list.html#c.PyList_Type
-var List = togo(C._go_PyList_Type)
+var List = togo((*C.PyObject)(unsafe.Pointer(&C.PyList_Type)))
 
 //PyList_Check : https://docs.python.org/3/c-api/list.html#c.PyList_Check
 func PyList_Check(p *PyObject) bool {
@@ -43,8 +43,8 @@ func PyList_GetItem(p *PyObject, pos int) *PyObject {
 }
 
 //PyList_SetItem : https://docs.python.org/3/c-api/list.html#c.PyList_SetItem
-func PyList_SetItem(p *PyObject, pos int, o *PyObject) {
-	C.PyList_SetItem(toc(p), C.Py_ssize_t(pos), toc(o))
+func PyList_SetItem(p *PyObject, pos int, o *PyObject) int {
+	return int(C.PyList_SetItem(toc(p), C.Py_ssize_t(pos), toc(o)))
 }
 
 //PyList_Insert : https://docs.python.org/3/c-api/list.html#c.PyList_Insert

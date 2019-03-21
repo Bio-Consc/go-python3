@@ -10,7 +10,6 @@ package python3
 /*
 #include "Python.h"
 #include "macro.h"
-#include "type.h"
 */
 import "C"
 import (
@@ -18,7 +17,7 @@ import (
 )
 
 //Unicode : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_Type
-var Unicode = togo(C._go_PyUnicode_Type)
+var Unicode = togo((*C.PyObject)(unsafe.Pointer(&C.PyUnicode_Type)))
 
 //PyUnicode_Check : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_Check
 func PyUnicode_Check(o *PyObject) bool {
@@ -31,7 +30,7 @@ func PyUnicode_CheckExact(o *PyObject) bool {
 }
 
 //PyUnicode_New : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_New
-func PyUnicode_New(size, maxchar rune) *PyObject {
+func PyUnicode_New(size int, maxchar rune) *PyObject {
 	return togo(C.PyUnicode_New(C.Py_ssize_t(size), C.Py_UCS4(maxchar)))
 }
 
@@ -71,8 +70,8 @@ func PyUnicode_Fill(unicode *PyObject, start, length int, fill_char rune) int {
 }
 
 //PyUnicode_WriteChar : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_WriteChar
-func PyUnicode_WriteChar(unicode *PyObject, index int, character rune) {
-	C.PyUnicode_WriteChar(toc(unicode), C.Py_ssize_t(index), C.Py_UCS4(character))
+func PyUnicode_WriteChar(unicode *PyObject, index int, character rune) int {
+	return int(C.PyUnicode_WriteChar(toc(unicode), C.Py_ssize_t(index), C.Py_UCS4(character)))
 }
 
 //PyUnicode_ReadChar : https://docs.python.org/3/c-api/unicode.html#c.PyUnicode_ReadChar
