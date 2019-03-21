@@ -10,21 +10,12 @@ package python3
 /*
 #include "Python.h"
 #include "macro.h"
-<<<<<<< HEAD
 #include "type.h"
 */
 import "C"
 
 //Type : https://docs.python.org/3/c-api/type.html#c.PyType_Type
 var Type = togo(C._go_PyType_Type)
-=======
-*/
-import "C"
-import "unsafe"
-
-//Type : https://docs.python.org/3/c-api/type.html#c.PyType_Type
-var Type = togo((*C.PyObject)(unsafe.Pointer(&C.PyType_Type)))
->>>>>>> 0b25cc550560f4b3e49c89af907f7cfeffe94dac
 
 //PyType_Check : https://docs.python.org/3/c-api/type.html#c.PyType_Check
 func PyType_Check(o *PyObject) bool {
