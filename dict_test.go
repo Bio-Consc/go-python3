@@ -91,6 +91,4 @@ func TestDict(t *testing.T) {
 
 	dict.DecRef()
 
-	PyDict_ClearFreeList()
-
 }
